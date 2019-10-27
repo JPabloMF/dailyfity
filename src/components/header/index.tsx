@@ -1,10 +1,4 @@
-import React from 'react';
-import {
-  fade,
-  makeStyles,
-  Theme,
-  createStyles
-} from '@material-ui/core/styles';
+import React, { useState, MouseEvent, ReactNode } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,129 +6,85 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import FormatPaint from '@material-ui/icons/FormatPaint';
 import Language from '@material-ui/icons/Language';
+import { useStyles } from './styles';
 
 import logo from '../../assets/img/dailfitylogo.png';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    grow: {
-      flexGrow: 1
-    },
-    menuButton: {
-      marginRight: theme.spacing(2)
-    },
-    title: {
-      display: 'none',
-      [theme.breakpoints.up('sm')]: {
-        display: 'block'
-      }
-    },
-    appbar: {
-      backgroundColor: 'white',
-      borderRadius: '0px 0px 10px 10px'
-    },
-    icons: {
-      color: '#a5b1c2',
-      margin: ' 0 2px'
-    },
-    themeOptions: {
-      width: '30px',
-      height: '30px',
-      borderRadius: '50%',
-      margin: '0 5px'
-    },
-    menuItemOptionsContainer: {
-      display: 'flex'
-    }
-  })
-);
-
 export default function Header() {
   const classes = useStyles();
-  const [anchorElTheme, setAnchorElTheme] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElLang, setAnchorElLang] = React.useState<null | HTMLElement>(
-    null
-  );
+
+  const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
+  const [anchorElLang, setAnchorElLang] = useState<null | HTMLElement>(null);
 
   const isThemeMenuOpen = Boolean(anchorElTheme);
   const isLangMenuOpen = Boolean(anchorElLang);
 
-  const handleThemeMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleThemeMenuOpen = (event: MouseEvent<HTMLElement>) =>
     setAnchorElTheme(event.currentTarget);
-  };
 
-  const handleLanguajeMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  const handleLanguajeMenuOpen = (event: MouseEvent<HTMLElement>) =>
     setAnchorElLang(event.currentTarget);
-  };
 
-  const handleThemeMenuClose = () => {
-    setAnchorElTheme(null);
-  };
+  const handleThemeMenuClose = () => setAnchorElTheme(null);
 
-  const handleLangMenuClose = () => {
-    setAnchorElLang(null);
-  };
+  const handleLangMenuClose = () => setAnchorElLang(null);
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenuTheme = (
+  const renderMenu = (
+    anchorEl: HTMLElement | null,
+    id: string,
+    open: boolean,
+    onClose: any,
+    anchorOrigin: any,
+    transformOrigin: any,
+    children: ReactNode
+  ) => (
     <Menu
-      anchorEl={anchorElTheme}
+      anchorEl={anchorEl}
       getContentAnchorEl={null}
       elevation={3}
-      id={menuId}
+      id={id}
       keepMounted
-      open={isThemeMenuOpen}
-      onClose={handleThemeMenuClose}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center'
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center'
-      }}
+      open={open}
+      onClose={onClose}
+      anchorOrigin={anchorOrigin}
+      transformOrigin={transformOrigin}
     >
-      <div className={classes.menuItemOptionsContainer}>
-        <MenuItem
-          className={classes.themeOptions}
-          style={{ backgroundColor: '#333945' }}
-          onClick={handleThemeMenuClose}
-        />
-        <MenuItem
-          className={classes.themeOptions}
-          style={{ backgroundColor: '#a5b1c2' }}
-          onClick={handleThemeMenuClose}
-        />
-      </div>
+      {children}
     </Menu>
   );
 
-  const renderMenuLanguaje = (
-    <Menu
-      anchorEl={anchorElLang}
-      getContentAnchorEl={null}
-      elevation={3}
-      id={menuId}
-      keepMounted
-      open={isLangMenuOpen}
-      onClose={handleLangMenuClose}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center'
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center'
-      }}
-    >
-      <div className={classes.menuItemOptionsContainer}>
-        <MenuItem onClick={handleLangMenuClose}>ES</MenuItem>
-        <MenuItem onClick={handleLangMenuClose}>EN</MenuItem>
-      </div>
-    </Menu>
+  const childTheme = (
+    <div className={classes.menuItemOptionsContainer}>
+      <MenuItem
+        className={classes.themeOptions}
+        style={{ backgroundColor: '#333945' }}
+        onClick={handleThemeMenuClose}
+      />
+      <MenuItem
+        className={classes.themeOptions}
+        style={{ backgroundColor: '#a5b1c2' }}
+        onClick={handleThemeMenuClose}
+      />
+    </div>
   );
+
+  const childLang = (
+    <div className={classes.menuItemOptionsContainer}>
+      <MenuItem onClick={handleLangMenuClose}>ES</MenuItem>
+      <MenuItem onClick={handleLangMenuClose}>EN</MenuItem>
+    </div>
+  );
+
+  const menuAlignOptions = {
+    anchorOrigin: {
+      vertical: 'bottom',
+      horizontal: 'center'
+    },
+    transformOrigin: {
+      vertical: 'top',
+      horizontal: 'center'
+    }
+  };
 
   return (
     <div className={classes.grow}>
@@ -145,7 +95,7 @@ export default function Header() {
           <IconButton
             edge="end"
             aria-label="Change language"
-            aria-controls={menuId}
+            aria-controls="languajeMenu"
             aria-haspopup="true"
             onClick={handleLanguajeMenuOpen}
             className={classes.icons}
@@ -156,7 +106,7 @@ export default function Header() {
           <IconButton
             edge="end"
             aria-label="Change theme"
-            aria-controls={menuId}
+            aria-controls="themeMenu"
             aria-haspopup="true"
             onClick={handleThemeMenuOpen}
             className={classes.icons}
@@ -166,8 +116,24 @@ export default function Header() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      {renderMenuTheme}
-      {renderMenuLanguaje}
+      {renderMenu(
+        anchorElTheme,
+        'themeMenu',
+        isThemeMenuOpen,
+        handleThemeMenuClose,
+        menuAlignOptions.anchorOrigin,
+        menuAlignOptions.transformOrigin,
+        childTheme
+      )}
+      {renderMenu(
+        anchorElLang,
+        'languajeMenu',
+        isLangMenuOpen,
+        handleLangMenuClose,
+        menuAlignOptions.anchorOrigin,
+        menuAlignOptions.transformOrigin,
+        childLang
+      )}
     </div>
   );
 }
