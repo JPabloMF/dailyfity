@@ -1,14 +1,39 @@
-import React from "react";
+import React from 'react';
+import { connect } from 'react-redux';
 
+/* Components */
 import Header from '../../components/header';
 
+/* Utils */
+import { GlobalStyle } from '../../utils/styles';
+
 interface Props {
+  colorTheme: string;
+  dispatch: any;
   path: string;
 }
 
-const WeekRoutine = (props: Props) => {
-  return <div><Header></Header></div>;
+const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
+  const isWhiteTheme = colorTheme === 'white' ? true : false;
+
+  return (
+    <div>
+      <GlobalStyle whiteTheme={isWhiteTheme} />
+      <Header
+        whiteTheme={isWhiteTheme}
+        colorTheme={colorTheme}
+        dispatch={dispatch}
+      />
+    </div>
+  );
 };
 
-export default WeekRoutine;
+const mapStateToProps = ({
+  global: { colorTheme }
+}: {
+  global: { colorTheme: string };
+}) => ({
+  colorTheme
+});
 
+export default connect(mapStateToProps)(WeekRoutine);

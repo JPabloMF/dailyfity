@@ -10,7 +10,15 @@ import { useStyles } from './styles';
 
 import logo from '../../assets/img/dailfitylogo.png';
 
-export default function Header() {
+import { changeThemeColor } from '../../store/actions';
+
+interface Props {
+  whiteTheme: boolean;
+  colorTheme: string;
+  dispatch: any;
+}
+
+function Header({ whiteTheme, colorTheme, dispatch }: Props) {
   const classes = useStyles();
 
   const [anchorElTheme, setAnchorElTheme] = useState<null | HTMLElement>(null);
@@ -25,7 +33,12 @@ export default function Header() {
   const handleLanguajeMenuOpen = (event: MouseEvent<HTMLElement>) =>
     setAnchorElLang(event.currentTarget);
 
-  const handleThemeMenuClose = () => setAnchorElTheme(null);
+  const handleThemeMenuClose = ({ target }: { target: any }) => {
+    if (target.id !== colorTheme) {
+      dispatch(changeThemeColor(target.id));
+    }
+    setAnchorElTheme(null);
+  };
 
   const handleLangMenuClose = () => setAnchorElLang(null);
 
@@ -56,11 +69,13 @@ export default function Header() {
   const childTheme = (
     <div className={classes.menuItemOptionsContainer}>
       <MenuItem
+        id="black"
         className={classes.themeOptions}
         style={{ backgroundColor: '#333945' }}
         onClick={handleThemeMenuClose}
       />
       <MenuItem
+        id="white"
         className={classes.themeOptions}
         style={{ backgroundColor: '#a5b1c2' }}
         onClick={handleThemeMenuClose}
@@ -88,9 +103,13 @@ export default function Header() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.appbar}>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: whiteTheme ? 'white' : '#333945' }}
+        className={classes.appbar}
+      >
         <Toolbar>
-          <img alt="test" src={logo} width="120px" />
+          <img alt="logo" src={logo} width="120px" />
           <div className={classes.grow} />
           <IconButton
             edge="end"
@@ -137,3 +156,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default Header;
