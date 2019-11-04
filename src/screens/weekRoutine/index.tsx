@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 /* Components */
 import Header from '../../components/header';
+import List from "../../components/list";
 
 /* Utils */
 import { GlobalStyle } from '../../utils/styles';
@@ -24,6 +25,7 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
         colorTheme={colorTheme}
         dispatch={dispatch}
       />
+      <List />
     </div>
   );
 };
