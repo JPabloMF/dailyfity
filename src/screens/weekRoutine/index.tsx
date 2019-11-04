@@ -7,7 +7,7 @@ import Header from '../../components/header';
 import Tab from '../../components/tab';
 
 /* Utils */
-import { GlobalStyle } from "../../utils/styles";
+import { GlobalStyle } from '../../utils/styles';
 
 interface Props {
   colorTheme: string;
@@ -16,7 +16,7 @@ interface Props {
 }
 
 interface PropsStyledTitle {
-  isWhiteTheme: boolean
+  isWhiteTheme: boolean;
 }
 
 /* Styles */
@@ -24,16 +24,14 @@ const StyledTitle = styled.p`
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-size: 25px;
-  @media (max-width: 768px) {
-    color: ${(props:PropsStyledTitle) => props.isWhiteTheme ? "#000": "#fff"};
-  }
+  color: ${(props: PropsStyledTitle) => (props.isWhiteTheme ? '#000' : '#fff')};
   & span {
     color: #c68bff;
   }
 `;
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
-  const isWhiteTheme = colorTheme === "white" ? true : false;
+  const isWhiteTheme = colorTheme === 'white' ? true : false;
 
   return (
     <div>
