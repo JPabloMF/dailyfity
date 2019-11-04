@@ -7,7 +7,7 @@ import Header from '../../components/header';
 import Tab from '../../components/tab';
 
 /* Utils */
-import { GlobalStyle } from '../../utils/styles';
+import { GlobalStyle } from "../../utils/styles";
 
 interface Props {
   colorTheme: string;
@@ -33,7 +33,7 @@ const StyledTitle = styled.p`
 `;
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
-  const isWhiteTheme = colorTheme === 'white' ? true : false;
+  const isWhiteTheme = colorTheme === "white" ? true : false;
 
   return (
     <div>
