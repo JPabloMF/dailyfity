@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: "transparent",
     width: "60%",
-    paddingTop: "50px",
+    paddingTop: "10px",
     margin: "auto",
     "& .PrivateTabIndicator-colorPrimary-98": {
       backgroundColor: "transparent"
