@@ -1,8 +1,4 @@
-import {
-  makeStyles,
-  Theme,
-  createStyles
-} from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,7 +26,11 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: '30px',
       height: '30px',
       borderRadius: '100%',
-      margin: '0 5px'
+      margin: '0 5px',
+      [theme.breakpoints.down('sm')]: {
+        width: '10px',
+        height: '10px'
+      }
     },
     menuItemOptionsContainer: {
       display: 'flex'

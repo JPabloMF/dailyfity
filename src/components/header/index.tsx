@@ -34,7 +34,7 @@ function Header({ whiteTheme, colorTheme, dispatch }: Props) {
     setAnchorElLang(event.currentTarget);
 
   const handleThemeMenuClose = ({ target }: { target: any }) => {
-    if (target.id !== colorTheme) {
+    if (target.id && target.id !== colorTheme) {
       dispatch(changeThemeColor(target.id));
     }
     setAnchorElTheme(null);
