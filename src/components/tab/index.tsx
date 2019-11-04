@@ -42,8 +42,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     backgroundColor: "transparent",
     width: "60%",
-    paddingTop: "50px",
+    paddingTop: "10px",
     margin: "auto",
+    [theme.breakpoints.down('sm')]: {
+      width: "100%"
+    },
     "& .PrivateTabIndicator-colorPrimary-98": {
       backgroundColor: "transparent"
     },
@@ -61,7 +64,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderColor: "transparent",
     outlineColor: "transparent",
     textDecoration: "none",
-    borderRadius: "10px"
+    borderRadius: "10px",
+    [theme.breakpoints.down('sm')]: {
+      marginRight: "5px",
+      marginLeft: "5px"
+    }
   },
   tabsContainer: {
     boxShadow: "0px 0px 0px 0px rgba(0,0,0,0)",
