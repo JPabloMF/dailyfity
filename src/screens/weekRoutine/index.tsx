@@ -15,11 +15,18 @@ interface Props {
   path: string;
 }
 
+interface PropsStyledTitle {
+  isWhiteTheme: boolean
+}
+
 /* Styles */
 const StyledTitle = styled.p`
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-size: 25px;
+  @media (max-width: 768px) {
+    color: ${(props:PropsStyledTitle) => props.isWhiteTheme ? "#000": "#fff"};
+  }
   & span {
     color: #c68bff;
   }
@@ -36,7 +43,7 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
         colorTheme={colorTheme}
         dispatch={dispatch}
       />
-      <StyledTitle>
+      <StyledTitle isWhiteTheme={isWhiteTheme}>
         <span>¡Hello!</span> This is your fitness plan for this week
       </StyledTitle>
       <Tab />
