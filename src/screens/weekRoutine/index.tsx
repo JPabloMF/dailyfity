@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
@@ -12,6 +12,7 @@ import List from '../../components/list';
 
 /* Utils */
 import { GlobalStyle } from '../../utils/styles';
+import { changeThemeColor } from '../../store/actions';
 
 interface Props {
   colorTheme: string;
@@ -50,6 +51,14 @@ const mockData = [
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
+  useEffect(() => {
+    const theme = window.localStorage.getItem('colorTheme');
+    if (!theme) {
+      window.localStorage.setItem('colorTheme', colorTheme);
+    } else {
+      dispatch(changeThemeColor(theme));
+    }
+  }, []);
 
   const isWhiteTheme = colorTheme === 'white' ? true : false;
 

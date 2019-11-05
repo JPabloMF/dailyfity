@@ -33,8 +33,9 @@ function Header({ whiteTheme, colorTheme, dispatch }: Props) {
   const handleLanguajeMenuOpen = (event: MouseEvent<HTMLElement>) =>
     setAnchorElLang(event.currentTarget);
 
-  const handleThemeMenuClose = ({ target }: { target: any }) => {
+  const handleSelectTheme = ({ target }: { target: any }) => {
     if (target.id && target.id !== colorTheme) {
+      window.localStorage.setItem('colorTheme', target.id);
       dispatch(changeThemeColor(target.id));
     }
     setAnchorElTheme(null);
@@ -72,13 +73,13 @@ function Header({ whiteTheme, colorTheme, dispatch }: Props) {
         id="black"
         className={classes.themeOptions}
         style={{ backgroundColor: '#333945' }}
-        onClick={handleThemeMenuClose}
+        onClick={handleSelectTheme}
       />
       <MenuItem
         id="white"
         className={classes.themeOptions}
         style={{ backgroundColor: '#a5b1c2' }}
-        onClick={handleThemeMenuClose}
+        onClick={handleSelectTheme}
       />
     </div>
   );
@@ -139,7 +140,7 @@ function Header({ whiteTheme, colorTheme, dispatch }: Props) {
         anchorElTheme,
         'themeMenu',
         isThemeMenuOpen,
-        handleThemeMenuClose,
+        handleSelectTheme,
         menuAlignOptions.anchorOrigin,
         menuAlignOptions.transformOrigin,
         childTheme
