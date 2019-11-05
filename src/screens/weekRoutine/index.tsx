@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ import Tab from '../../components/tab';
 
 /* Utils */
 import { GlobalStyle } from '../../utils/styles';
+import { changeThemeColor } from '../../store/actions';
 
 interface Props {
   colorTheme: string;
@@ -31,6 +32,15 @@ const StyledTitle = styled.p`
 `;
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
+  useEffect(() => {
+    const theme = window.localStorage.getItem('colorTheme');
+    if (!theme) {
+      window.localStorage.setItem('colorTheme', colorTheme);
+    } else {
+      dispatch(changeThemeColor(theme));
+    }
+  }, []);
+
   const isWhiteTheme = colorTheme === 'white' ? true : false;
 
   return (
