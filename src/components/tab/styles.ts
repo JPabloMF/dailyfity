@@ -17,10 +17,13 @@ export const useStyles = makeStyles((theme: Theme) =>
         color: '#fff !important',
         backgroundColor: '#924bd6',
         boxShadow: '0px 2px 3px 2px #a55eea8c'
+      },
+      '& .MuiTabs-flexContainer': {
+        justifyContent: 'space-evenly'
       }
     },
     tab: {
-      marginRight: '50px',
+      maxWidth: '200px !important',
       backgroundColor: '#c68bff',
       color: '#e1e1e1 !important',
       boxShadow: '0px 2px 3px 2px #a55eea5c',
