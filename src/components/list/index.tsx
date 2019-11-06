@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -8,16 +8,44 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  panel: {
-    marginBottom: '20px !important'
-  }
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      '& .MuiExpansionPanelSummary-content': {
+        alignItems: 'center'
+      }
+    },
+    panel: {
+      marginBottom: '20px !important'
+    },
+    checkbox: {
+      '& .MuiIconButton-label': {
+        boxShadow: '0px 2px 3px 2px #a55eea8c',
+        borderRadius: '5px',
+        padding: '3px'
+      }
+    },
+    secondaryHeading: {
+      fontSize: '15px',
+      height: '21px',
+      marginRight: '50px',
+      color: '#a3a7ac',
+      [theme.breakpoints.down('sm')]: {
+        marginRight: '10px'
+      }
+    }
+  })
+);
 
-export default function List() {
+interface Props {
+  day: string;
+  name?: string;
+  muscles: Array<object>;
+  checked: boolean;
+}
+
+export default function List({ day, name, muscles, checked }: Props) {
   const classes = useStyles();
 
   return (
@@ -30,12 +58,27 @@ export default function List() {
           id="additional-actions1-header"
         >
           <FormControlLabel
-            aria-label="Acknowledge"
+            aria-label={day}
             onClick={(event) => event.stopPropagation()}
             onFocus={(event) => event.stopPropagation()}
-            control={<Checkbox />}
-            label="I acknowledge"
+            control={
+              <Checkbox
+                color="default"
+                className={classes.checkbox}
+                checked={checked}
+              />
+            }
+            label={day}
           />
+          {muscles &&
+            muscles.map((muscle: any, indexMuscle: number) => (
+              <Typography
+                key={indexMuscle}
+                className={classes.secondaryHeading}
+              >
+                {muscle.name}
+              </Typography>
+            ))}
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography color="textSecondary">

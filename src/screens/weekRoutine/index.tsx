@@ -43,9 +43,47 @@ const StyledTitle = styled.p`
 `;
 
 const mockData = [
-  { title: 'Flex week', routines: [1, 2, 3] },
-  { title: 'Week 1', routines: [1, 2, 3, 4] },
-  { title: 'Week 2', routines: [1, 2] }
+  {
+    title: 'Flex week',
+    routines: [
+      {
+        day: 'Monday',
+        muscles: [
+          {
+            name: 'Upper chest',
+            exercises: [
+              {
+                name: 'Flights with dumbells',
+                quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                Considerations: [
+                  'For each serie take a rest of 30 seconds',
+                  'When the reps'
+                ],
+                img: ''
+              }
+            ]
+          },
+          {
+            name: 'Triceps',
+            exercises: [
+              {
+                name: 'Trapezius with bar',
+                quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                Considerations: [
+                  'For each serie take a rest of 30 seconds',
+                  'When the reps'
+                ],
+                img: ''
+              }
+            ]
+          }
+        ],
+        checked: false
+      }
+    ]
+  },
+  { title: 'Week 1', routines: [{}, {}] },
+  { title: 'Week 2', routines: [{}, {}] }
 ];
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
@@ -74,7 +112,7 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
         aria-labelledby={`full-width-tab-${index}`}
         {...other}
       >
-        <Box p={3} style={{ padding: '0',paddingTop: '20px' }}>
+        <Box p={3} style={{ padding: '0', paddingTop: '20px' }}>
           {children}
         </Box>
       </Typography>
@@ -94,10 +132,22 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
       </StyledTitle>
       <Tab setValue={setValue} value={value} theme={theme}>
         {mockData.map((week, indexWeek) => (
-          <TabPanel value={value} index={indexWeek} dir={theme.direction}>
-            {week.routines.map((element, index) => (
-              <List />
-            ))}
+          <TabPanel
+            key={indexWeek}
+            value={value}
+            index={indexWeek}
+            dir={theme.direction}
+          >
+            {(week.routines as Array<object>).map(
+              (routine: any, indexRoutine: number) => (
+                <List
+                  day={routine.day}
+                  muscles={routine.muscles}
+                  checked={routine.checked}
+                  key={indexRoutine}
+                />
+              )
+            )}
           </TabPanel>
         ))}
       </Tab>
