@@ -10,8 +10,8 @@ export const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down('sm')]: {
         width: '100%'
       },
-      '& .PrivateTabIndicator-colorPrimary-98': {
-        backgroundColor: 'transparent'
+      '& .MuiTabs-indicator': {
+        display: 'none'
       },
       '& .Mui-selected': {
         color: '#fff !important',
