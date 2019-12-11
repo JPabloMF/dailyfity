@@ -1,23 +1,17 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import 'semantic-ui-css/semantic.min.css';
+
+import Header from './components/header';
+import Tab from './components/tab';
+import List from './components/list';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Header />
+      <Tab />
+      <List />
+    </Fragment>
   );
 }
 
