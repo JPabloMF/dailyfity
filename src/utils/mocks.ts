@@ -36,6 +36,30 @@ export const MOCKDATA = [
         ],
         checked: false,
       },
+      {
+        day: 'Wednesday',
+        muscles: [
+          { name: 'Upper back', exercises: [] },
+          { name: 'Biceps', exercises: [] },
+          { name: 'Shoulders', exercises: [] }
+        ],
+        checked: false,
+      },
+      {
+        day: 'Friday',
+        muscles: [
+          { name: 'Cuadriceps', exercises: [] },
+          { name: 'Calves', exercises: [] }
+        ],
+        checked: false,
+      },
+      {
+        day: 'Sunday',
+        muscles: [
+          { name: 'ABS', exercises: [] }
+        ],
+        checked: false,
+      },
     ],
   },
   { title: 'Week 1', routines: [{}, {}] },
