@@ -7,24 +7,29 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Check from '@material-ui/icons/Check';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
       '& .MuiExpansionPanelSummary-content': {
-        alignItems: 'center'
-      }
+        alignItems: 'center',
+      },
     },
     panel: {
-      marginBottom: '20px !important'
+      marginBottom: '20px !important',
     },
     checkbox: {
       '& .MuiIconButton-label': {
-        boxShadow: '0px 2px 3px 2px #a55eea8c',
-        borderRadius: '5px',
-        padding: '3px'
-      }
+        backgroundColor: (props: any) =>
+          props.checked ? '#26de81' : 'transparent',
+        borderRadius: '10px',
+        padding: '3px',
+        border: (props: any) =>
+          props.checked ? '3px solid #26de81' : '3px solid grey',
+      },
+      color: (props: any) => (props.checked ? 'white' : 'transparent'),
     },
     secondaryHeading: {
       fontSize: '15px',
@@ -32,9 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: '50px',
       color: '#a3a7ac',
       [theme.breakpoints.down('sm')]: {
-        marginRight: '10px'
-      }
-    }
+        marginRight: '10px',
+      },
+    },
   })
 );
 
@@ -46,7 +51,7 @@ interface Props {
 }
 
 export default function List({ day, name, muscles, checked }: Props) {
-  const classes = useStyles();
+  const classes = useStyles({ checked });
 
   return (
     <div className={classes.root}>
@@ -66,6 +71,7 @@ export default function List({ day, name, muscles, checked }: Props) {
                 color="default"
                 className={classes.checkbox}
                 checked={checked}
+                checkedIcon={<Check />}
               />
             }
             label={day}

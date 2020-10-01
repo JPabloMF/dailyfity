@@ -34,7 +34,7 @@ export const MOCKDATA = [
             ],
           },
         ],
-        checked: false,
+        checked: true,
       },
       {
         day: 'Wednesday',
