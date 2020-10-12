@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useTheme } from '@material-ui/core/styles';
@@ -12,7 +12,6 @@ import TabPanel from '../../components/tabPanel';
 /* Utils */
 import { GlobalStyle } from '../../utils/styles';
 import { changeThemeColor } from '../../store/actions';
-import { MOCKDATA } from '../../utils/mocks';
 
 interface Props {
   colorTheme: string;
@@ -37,7 +36,8 @@ const StyledTitle = styled.p`
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
     const theme = window.localStorage.getItem('colorTheme');
@@ -45,6 +45,9 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
       window.localStorage.setItem('colorTheme', colorTheme);
     } else {
       dispatch(changeThemeColor(theme));
+    }
+    if (localStorage.getItem('data')){
+      setData(JSON.parse(localStorage.getItem('data') || ''));
     }
   }, []);
 
@@ -62,25 +65,26 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
         <span>¡Hello!</span> This is your fitness plan for this week
       </StyledTitle>
       <Tab setValue={setValue} value={value} theme={theme}>
-        {MOCKDATA.map((week, indexWeek) => (
-          <TabPanel
-            key={indexWeek}
-            value={value}
-            index={indexWeek}
-            dir={theme.direction}
-          >
-            {(week.routines as Array<object>).map(
-              (routine: any, indexRoutine: number) => (
-                <List
-                  day={routine.day}
-                  muscles={routine.muscles}
-                  checked={routine.checked}
-                  key={indexRoutine}
-                />
-              )
-            )}
-          </TabPanel>
-        ))}
+        {data.length &&
+          data.map((week, indexWeek) => (
+            <TabPanel
+              key={indexWeek}
+              value={value}
+              index={indexWeek}
+              dir={theme.direction}
+            >
+              {(week.routines as Array<object>).map(
+                (routine: any, indexRoutine: number) => (
+                  <List
+                    day={routine.day}
+                    muscles={routine.muscles}
+                    checked={routine.checked}
+                    key={indexRoutine}
+                  />
+                )
+              )}
+            </TabPanel>
+          ))}
       </Tab>
     </div>
   );
