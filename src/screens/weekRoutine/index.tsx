@@ -46,10 +46,16 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
     } else {
       dispatch(changeThemeColor(theme));
     }
-    if (localStorage.getItem('data')){
+    if (localStorage.getItem('data')) {
       setData(JSON.parse(localStorage.getItem('data') || ''));
     }
   }, []);
+
+  useEffect(()=>{
+    if (data.length){
+      localStorage.setItem('data', JSON.stringify(data));
+    }
+  },[data])
 
   const isWhiteTheme = colorTheme === 'white' ? true : false;
 
@@ -76,10 +82,14 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
               {(week.routines as Array<object>).map(
                 (routine: any, indexRoutine: number) => (
                   <List
+                    key={indexRoutine}
                     day={routine.day}
                     muscles={routine.muscles}
                     checked={routine.checked}
-                    key={indexRoutine}
+                    indexWeek={indexWeek}
+                    indexRoutine={indexRoutine}
+                    data={data}
+                    setData={setData}
                   />
                 )
               )}

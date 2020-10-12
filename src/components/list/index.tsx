@@ -48,10 +48,21 @@ interface Props {
   name?: string;
   muscles: Array<object>;
   checked: boolean;
+  indexWeek: number;
+  indexRoutine: number;
+  data: Array<any>;
+  setData: any;
 }
 
-export default function List({ day, name, muscles, checked }: Props) {
+export default function List({ day, name, muscles, checked, indexWeek, indexRoutine, data, setData }: Props) {
   const classes = useStyles({ checked });
+
+  const handleCheck = (indexWeek: number, indexRoutine: number) => {
+    const modifiedData = [...data];
+    let checked = modifiedData[indexWeek].routines[indexRoutine].checked;
+    modifiedData[indexWeek].routines[indexRoutine].checked = !checked;
+    setData(modifiedData);
+  };
 
   return (
     <div className={classes.root}>
@@ -72,6 +83,7 @@ export default function List({ day, name, muscles, checked }: Props) {
                 className={classes.checkbox}
                 checked={checked}
                 checkedIcon={<Check />}
+                onClick={() => handleCheck(indexWeek, indexRoutine)}
               />
             }
             label={day}
