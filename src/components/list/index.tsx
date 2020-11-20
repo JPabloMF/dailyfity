@@ -40,6 +40,15 @@ const useStyles = makeStyles((theme: Theme) =>
         marginRight: '10px',
       },
     },
+    darkPanel: {
+      backgroundColor: '#a1b3c4',
+      '& .MuiFormControlLabel-label.Mui-disabled': {
+        color: 'black',
+      },
+    },
+    whiteText: {
+      color: 'white',
+    },
   })
 );
 
@@ -52,9 +61,22 @@ interface Props {
   indexRoutine: number;
   data: Array<any>;
   setData: any;
+  passedDay: boolean;
+  passedWeek: boolean;
 }
 
-export default function List({ day, name, muscles, checked, indexWeek, indexRoutine, data, setData }: Props) {
+export default function List({
+  day,
+  name,
+  muscles,
+  checked,
+  indexWeek,
+  indexRoutine,
+  data,
+  setData,
+  passedDay,
+  passedWeek,
+}: Props) {
   const classes = useStyles({ checked });
 
   const handleCheck = (indexWeek: number, indexRoutine: number) => {
@@ -64,9 +86,13 @@ export default function List({ day, name, muscles, checked, indexWeek, indexRout
     setData(modifiedData);
   };
 
+  const panelStyle = passedDay || passedWeek ? classes.darkPanel : '';
+
+  const textStyle = passedDay || passedWeek ? classes.whiteText : '';
+
   return (
     <div className={classes.root}>
-      <ExpansionPanel className={classes.panel}>
+      <ExpansionPanel className={`${classes.panel} ${panelStyle}`}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-label="Expand"
@@ -84,6 +110,7 @@ export default function List({ day, name, muscles, checked, indexWeek, indexRout
                 checked={checked}
                 checkedIcon={<Check />}
                 onClick={() => handleCheck(indexWeek, indexRoutine)}
+                disabled={passedDay || passedWeek}
               />
             }
             label={day}
@@ -92,7 +119,7 @@ export default function List({ day, name, muscles, checked, indexWeek, indexRout
             muscles.map((muscle: any, indexMuscle: number) => (
               <Typography
                 key={indexMuscle}
-                className={classes.secondaryHeading}
+                className={`${classes.secondaryHeading} ${textStyle}`}
               >
                 {muscle.name}
               </Typography>

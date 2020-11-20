@@ -10,6 +10,7 @@ import List from '../../components/list';
 import TabPanel from '../../components/tabPanel';
 
 /* Utils */
+import { getWeekNumber, getDayOfWeek, hasPassedWeek } from '../../utils';
 import { GlobalStyle } from '../../utils/styles';
 import { changeThemeColor } from '../../store/actions';
 
@@ -36,26 +37,26 @@ const StyledTitle = styled.p`
 
 const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
   const theme = useTheme();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(getWeekNumber());
   const [data, setData] = useState<any[]>([]);
 
   useEffect(() => {
-    const theme = window.localStorage.getItem('colorTheme');
+    const theme = localStorage.getItem('colorTheme');
+    const data = localStorage.getItem('data')
+
     if (!theme) {
       window.localStorage.setItem('colorTheme', colorTheme);
     } else {
       dispatch(changeThemeColor(theme));
     }
-    if (localStorage.getItem('data')) {
+
+    if (data) {
       setData(JSON.parse(localStorage.getItem('data') || ''));
     }
   }, []);
 
-  useEffect(()=>{
-    if (data.length){
-      localStorage.setItem('data', JSON.stringify(data));
-    }
-  },[data])
+  const hasPassedDay = (day: string): boolean =>
+    getDayOfWeek(day) > 0 && getDayOfWeek(day) < new Date().getDay();
 
   const isWhiteTheme = colorTheme === 'white' ? true : false;
 
@@ -90,6 +91,8 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
                     indexRoutine={indexRoutine}
                     data={data}
                     setData={setData}
+                    passedDay={hasPassedDay(routine.day)}
+                    passedWeek={hasPassedWeek(indexWeek)}
                   />
                 )
               )}
