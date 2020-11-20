@@ -13,7 +13,11 @@ import { MOCKDATA } from './utils/mocks';
 
 function App() {
   useEffect(()=>{
-    if(!localStorage.getItem('data')){
+    const data = localStorage.getItem('data')
+    if(!data){
+      localStorage.setItem('data', JSON.stringify(MOCKDATA));
+    } else if ((JSON.stringify(data) !== JSON.stringify(MOCKDATA))) {
+      localStorage.removeItem('data');
       localStorage.setItem('data', JSON.stringify(MOCKDATA));
     }
   },[])
