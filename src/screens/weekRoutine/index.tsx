@@ -14,6 +14,9 @@ import { getWeekNumber, getDayOfWeek, hasPassedWeek } from '../../utils';
 import { GlobalStyle } from '../../utils/styles';
 import { changeThemeColor } from '../../store/actions';
 
+/* DATA */
+import { MOCKDATA } from '../../utils/mocks';
+
 interface Props {
   colorTheme: string;
   dispatch: any;
@@ -42,7 +45,6 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
 
   useEffect(() => {
     const theme = localStorage.getItem('colorTheme');
-    const data = localStorage.getItem('data')
 
     if (!theme) {
       window.localStorage.setItem('colorTheme', colorTheme);
@@ -50,9 +52,7 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
       dispatch(changeThemeColor(theme));
     }
 
-    if (data) {
-      setData(JSON.parse(localStorage.getItem('data') || ''));
-    }
+    setData(MOCKDATA);
   }, []);
 
   const hasPassedDay = (day: string): boolean =>
