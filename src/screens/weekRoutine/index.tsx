@@ -71,7 +71,7 @@ const WeekRoutine = ({ colorTheme, dispatch }: Props) => {
       <StyledTitle isWhiteTheme={isWhiteTheme}>
         <span>¡Hello!</span> This is your fitness plan for this week
       </StyledTitle>
-      <Tab setValue={setValue} value={value} theme={theme}>
+      <Tab setValue={setValue} data={data} value={value} theme={theme}>
         {data.length &&
           data.map((week, indexWeek) => (
             <TabPanel

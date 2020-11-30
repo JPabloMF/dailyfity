@@ -9,6 +9,20 @@ export const GlobalStyle = createGlobalStyle<{ whiteTheme: boolean }>`
     background-image: url(${(props) => (props.whiteTheme ? img1 : img2)});
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     min-height: 100vh;
+  }
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #c68bff;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius: 10px;
   }
 `;

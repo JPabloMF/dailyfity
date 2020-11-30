@@ -5,11 +5,17 @@ import AppBar from '@material-ui/core/AppBar';
 import TabsMU from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+interface DataObject {
+  title: string,
+  routines: Array<Object>
+}
+
 interface Props {
   children?: React.ReactNode;
   setValue: any;
   value: number;
   theme: any;
+  data: Array<DataObject>;
 }
 
 function a11yProps(index: any) {
@@ -19,7 +25,13 @@ function a11yProps(index: any) {
   };
 }
 
-export default function Tabs({ children, setValue, value, theme }: Props) {
+export default function Tabs({
+  children,
+  setValue,
+  value,
+  theme,
+  data,
+}: Props) {
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -46,9 +58,14 @@ export default function Tabs({ children, setValue, value, theme }: Props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab className={classes.tab} label="Flex week" {...a11yProps(0)} />
-          <Tab className={classes.tab} label="Week 1" {...a11yProps(1)} />
-          <Tab className={classes.tab} label="Week 2" {...a11yProps(2)} />
+          {data.length &&
+            data.map((week, indexWeek) => (
+              <Tab
+                className={classes.tab}
+                label={week.title}
+                {...a11yProps(indexWeek)}
+              />
+            ))}
         </TabsMU>
       </AppBar>
       <SwipeableViews

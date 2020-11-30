@@ -8,6 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Check from '@material-ui/icons/Check';
+import ExerciseCategory from './exerciseCategory';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     panel: {
       marginBottom: '20px !important',
+    },
+    panelDetails: {
+      display: 'flex',
+      flexDirection: 'column',
     },
     checkbox: {
       '& .MuiIconButton-label': {
@@ -125,11 +130,15 @@ export default function List({
               </Typography>
             ))}
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography color="textSecondary">
-            The click event of the nested action will propagate up and expand
-            the panel unless you explicitly stop it.
-          </Typography>
+        <ExpansionPanelDetails className={classes.panelDetails}>
+          {muscles &&
+            muscles.map((muscle: any, indexMuscle: number) => (
+              <ExerciseCategory
+                key={indexMuscle}
+                exerciseName={muscle.name}
+                exercises={muscle.exercises}
+              />
+            ))}
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
