@@ -13,18 +13,21 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     panel: {
       marginBottom: '10px',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
     },
     panelDetailContainer: {
       display: 'flex',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
     },
     panelDetailContent: {
       display: 'flex',
       flexDirection: 'column',
     },
-    panelSummary:{
-      pointerEvents: 'none'
+    panelSummary: {
+      pointerEvents: 'none',
+    },
+    panelDetailImage:{
+      width: '250px'
     }
   })
 );
@@ -81,6 +84,7 @@ export default function Exercise({
           </div>
           {image && (
             <img
+              className={classes.panelDetailImage}
               src={require(`../../../../assets/exercises/${image}`)}
               alt={name}
             />

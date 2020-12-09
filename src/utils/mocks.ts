@@ -57,7 +57,29 @@ export const MOCKDATA = [
              {
                day: 'Wednesday',
                muscles: [
-                 { name: 'Back', exercises: [] },
+                 {
+                   name: 'Back',
+                   exercises: [
+                     {
+                       name: 'Lat Pull Down',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'lat-pull-down.png',
+                     },
+                     {
+                       name: 'Pull Ups',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'pull-ups.png',
+                     },
+                   ],
+                 },
                  { name: 'Biceps', exercises: [] },
                ],
                checked: false,
@@ -108,7 +130,26 @@ export const MOCKDATA = [
                  },
                  {
                    name: 'Triceps',
-                   exercises: [],
+                   exercises: [
+                     {
+                       name: 'Kick back',
+                       quantity: ['4 series', '12 > 10 > 8 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps down the weight increase',
+                       ],
+                       img: 'kick-back.png',
+                     },
+                     {
+                       name: 'Dip Machine',
+                       quantity: ['4 series', '12 > 10 > 8 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps down the weight increase',
+                       ],
+                       img: 'dip-machine.png',
+                     },
+                   ],
                  },
                ],
                checked: false,
@@ -118,7 +159,26 @@ export const MOCKDATA = [
                muscles: [
                  {
                    name: 'Lower back',
-                   exercises: [],
+                   exercises: [
+                     {
+                       name: 'Hyperextensions',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'hyperextensions.png',
+                     },
+                     {
+                       name: 'Deadlift',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'deadlift.png',
+                     },
+                   ],
                  },
                  {
                    name: 'Biceps',
@@ -187,13 +247,22 @@ export const MOCKDATA = [
                    name: 'Triceps',
                    exercises: [
                      {
-                       name: 'Trapezius with bar',
-                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       name: 'Standing Dumbbell Extension',
+                       quantity: ['4 series', '12 > 10 > 8 > 6 reps'],
                        considerations: [
                          'For each serie take a rest of 30 seconds',
-                         'When the reps',
+                         'When the reps down the weight increase',
                        ],
-                       img: '',
+                       img: 'standing-dumbell.png',
+                     },
+                     {
+                       name: 'Selectorized triceps extension',
+                       quantity: ['4 series', '12 > 10 > 8 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps down the weight increase',
+                       ],
+                       img: 'selectorized-extension.png',
                      },
                    ],
                  },
@@ -203,7 +272,29 @@ export const MOCKDATA = [
              {
                day: 'Wednesday',
                muscles: [
-                 { name: 'Upper back', exercises: [] },
+                 {
+                   name: 'Upper back',
+                   exercises: [
+                     {
+                       name: 'Barbell bent over arrow',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'barbell-bent-over-arrow.png',
+                     },
+                     {
+                       name: 'Seated Cable Row',
+                       quantity: ['4 series', '12 > 10 > 12 > 6 reps'],
+                       considerations: [
+                         'For each serie take a rest of 30 seconds',
+                         'When the reps',
+                       ],
+                       img: 'seated-cable-row.png',
+                     },
+                   ],
+                 },
                  { name: 'Biceps', exercises: [] },
                  { name: 'Shoulders', exercises: [] },
                ],
